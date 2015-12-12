@@ -1,15 +1,14 @@
 math.randomseed(os.time())
 math.random()
 
-local state = 'ingame'
 
 require 'lib/player'
 
 
-local player = Player:new()
-
 function love.load()
-
+    background = love.graphics.newImage("assets/img/mainscreen.png")
+    state = 'ingame'
+    player = Player:new()
 end
 
 function love.update(dt)
@@ -34,6 +33,7 @@ end
 
 function love.draw()
     if state == 'ingame' then
+        love.graphics.draw(background)
         player:draw()
     end
 end

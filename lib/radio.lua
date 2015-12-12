@@ -49,11 +49,11 @@ function Radio:draw()
     local w, h = love.graphics.getWidth(), love.graphics.getHeight()
     local current = self:currentStation()
     if current.censored then
-        love.graphics.print('[CENSORED]', w / 3, h / 3)
+        love.graphics.print('[CENSORED]', w / 3, h / 2.5)
     else
-        love.graphics.print(current.name, w / 3, h / 3)
-        love.graphics.print(current.loops, w / 5, h / 5)
-        love.graphics.print(current.position, w / 6, h / 6)
+        love.graphics.print(current.name, w / 3, h / 2.5)
+        love.graphics.print(current.loops, w / 5, h / 2.5)
+        love.graphics.print(current.position, w / 1.5, h / 2.5)
     end
 end
 
@@ -105,7 +105,6 @@ end
 function Radio:censor()
     local current = self:currentStation()
     local govt = self:govtStation()
-    -- TODO: visual feedback on 'you can't censor the govt station'
     if current == govt then 
         return false, "govt"
     end
