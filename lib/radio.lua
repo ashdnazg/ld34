@@ -18,6 +18,13 @@ local stations = {
         violations = {
             { range = { 1, 500 }, reason = "criticism" }
         }
+    },
+    {
+        name = 'CAT RADIO',
+        filename = 'assets/audio/cats.ogg',
+        violations = {
+            { range = { 40, 45 }, reason = "frup_grows_greater" }
+        }
     }
 }
 
