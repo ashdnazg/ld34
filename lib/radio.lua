@@ -3,6 +3,13 @@ local class = require "3rdparty/middleclass"
 require "lib/station"
 Radio = class('Radio')
 
+local statics = {
+    love.audio.newSource("assets/audio/static1.ogg"),
+    love.audio.newSource("assets/audio/static2.ogg"),
+    love.audio.newSource("assets/audio/static3.ogg"),
+    love.audio.newSource("assets/audio/static4.ogg"),
+}
+
 --TODO: if we want static, or static/channel crossover, mix the audio and put
 --the def in the correct position (on either side of the real track)
 --this becomes problematic with censoring, though...
@@ -122,6 +129,11 @@ function Radio:start()
     end
 end
 
+local function playRandomStatic()
+    local static = math.floor(#statics * math.random() + 1)
+    statics[static]:play()
+end
+
 function Radio:_setActiveStation(newStationIndex)
 	if (newStationIndex > #self.stations) then
 		newStationIndex = 1
@@ -135,8 +147,9 @@ function Radio:_setActiveStation(newStationIndex)
 	local new = self.stations[newStationIndex]
 	self.currentStationIndex = newStationIndex
 
-	curr:background()
-	new:foreground()
+    playRandomStatic()
+    curr:background()
+    new:foreground()
 end
 
 function Radio:advanceDial()
@@ -180,3 +193,4 @@ function Radio:conclude()
         end
     end
 end
+
