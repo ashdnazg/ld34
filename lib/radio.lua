@@ -13,17 +13,34 @@ local stations = {
         violations = {}
     },
     {
+        name = "FRUP4KIDS FM",
+        filename = 'assets/audio/children.ogg',
+        violations = {
+            { range =  { 142, 500 }, reason = "lies" }
+        },
+    },
+    {
+        name = "E.T. FM",
+        filename = 'assets/audio/aliens.ogg',
+        violations = {
+            { range = { 90, 95 } , reason = "lies"  },
+            { range = { 180, 500 }, reason = "morale" }
+        }
+    },
+    {
         name = 'Voice of Liberty FM',
         filename = 'assets/audio/opposition.ogg',
         violations = {
-            { range = { 1, 500 }, reason = "criticism" }
+            { range = { 1, 60 }, reason = "lies" },
+            -- TODO: classify more
+            { range = { 60, 500 }, reason = "morale" }
         }
     },
     {
         name = 'CAT RADIO',
         filename = 'assets/audio/cats.ogg',
         violations = {
-            { range = { 40, 45 }, reason = "frup_grows_greater" }
+            { range = { 115, 119 }, reason = "frup_grows_greater" }
         }
     }
 }
@@ -74,7 +91,7 @@ function Radio:start()
     end
 end
 
-function Radio:_setActiveStation(newStationIndex) 
+function Radio:_setActiveStation(newStationIndex)
 	if (newStationIndex > #self.stations) then
 		newStationIndex = 1
 	end
@@ -106,7 +123,7 @@ end
 function Radio:censor()
     local current = self:currentStation()
     local govt = self:govtStation()
-    if current == govt then 
+    if current == govt then
         return false, "govt"
     end
     if current.censored then

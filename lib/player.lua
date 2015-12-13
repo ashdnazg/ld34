@@ -16,8 +16,9 @@ local censorOutcomes = {
     already_censored = "this channel is already spreading THE TRUTH!",
     no_violation = "this channel is not currently in violation of any rules",
     plumbers = "FILTHY SEWAGE MONGERS!",
-    criticism = "We'll have none of that.",
-    top_secret = "Aiding and abetting THE ENEMY",
+    lies = "Such falsehoods will not be tolerated.",
+    morale = "Undermining the national morale.",
+    top_secret = "Aiding and abetting THE ENEMY.",
     frup_grows_greater = "FRUP GROWS EVER GREATER. Not any other way."
 }
 

@@ -40,6 +40,16 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
+    if state == 'ingame' then
+        game:keyPress(key)
+    elseif state == 'tutorial' then
+        --tutorial:keyPress(key)
+    elseif state == 'endgame' then
+        --endgame:keyPress(key)
+    end
+end
+
+function love.keyreleased(key)
     if state == "ingame" then
         game:handleKey(key)
     elseif state == 'tutorial' then
