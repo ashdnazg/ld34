@@ -88,7 +88,7 @@ local stations = {
         filename = 'assets/audio/weather.ogg',
         display = love.graphics.newImage('assets/img/rain.png'),
         violations = {
-            { range = { 73, 80 }, reason = "lies" },
+            { range = { 73, 80 }, reason = "top_secret" },
         }
     }
 }
