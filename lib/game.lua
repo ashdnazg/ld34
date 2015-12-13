@@ -148,7 +148,6 @@ function Game:handleMouse(x, y, button)
             self.player:censorStation()
             self.buttonStates['censor'].state = 0
         else
-            self.click:play()
             -- lazy: click only counts if it ends on the button as well
             self.buttonStates['censor'].state = 0
             self.buttonStates['prev'].state = 0
