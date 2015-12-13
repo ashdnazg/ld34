@@ -42,6 +42,38 @@ local stations = {
         violations = {
             { range = { 115, 119 }, reason = "frup_grows_greater" }
         }
+    },
+    {
+        name = 'Flip FM',
+        filename = 'assets/audio/talk_show.ogg',
+        violations = {
+            --TODO: set violations
+            { range = { 1, 60 }, reason = "lies" },
+        }
+    },
+    {
+        name = "FRUP n' Funk",
+        filename = 'assets/audio/frupnfunk.ogg',
+        violations = {
+            --TODO: set violations
+            { range = { 1, 60 }, reason = "lies" },
+        }
+    },
+    {
+        name = "Daily FRUP",
+        filename = 'assets/audio/news.ogg',
+        violations = {
+            --TODO: set violations
+            { range = { 1, 60 }, reason = "lies" },
+        }
+    },
+    {
+        name = "Rain Radio",
+        filename = 'assets/audio/weather.ogg',
+        violations = {
+            --TODO: set violations
+            { range = { 1, 60 }, reason = "lies" },
+        }
     }
 }
 
