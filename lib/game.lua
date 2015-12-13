@@ -4,6 +4,8 @@ require 'lib/player'
 Game = class('Game')
 
 function Game:initialize(advanceGameState)
+    self.click = love.audio.newSource("assets/audio/click.ogg")
+
     self.buttonStates = {
         next = {
             pressedImg = love.graphics.newImage("assets/img/next_pressed.png"),
@@ -45,10 +47,13 @@ end
 
 function Game:keyPress(key)
     if key == 'right' then
+        self.click:play()
         self.buttonStates['next'].state = 1
     elseif key == 'left' then
+        self.click:play()
         self.buttonStates['prev'].state = 1
     elseif key == 'c' then
+        self.click:play()
         self.buttonStates['censor'].state = 1
     elseif key == 'e' then
         self:conclude()
@@ -58,12 +63,15 @@ end
 
 function Game:handleKey(key)
     if key == 'right' then
+        self.click:play()
         self.player.radio:advanceDial()
         self.buttonStates['next'].state = 0
     elseif key == 'left' then
+        self.click:play()
         self.player.radio:retreatDial()
         self.buttonStates['prev'].state = 0
     elseif key == 'c' then
+        self.click:play()
         self.player:censorStation()
         self.buttonStates['censor'].state = 0
     elseif key == 'e' then
@@ -113,10 +121,13 @@ end
 function Game:mousePressed(x, y, button)
     if button == 'l' then
         if clickedRadioRight(x, y) then
+            self.click:play()
             self.buttonStates['next'].state = 1
         elseif clickedRadioLeft(x, y) then
+            self.click:play()
             self.buttonStates['prev'].state = 1
         elseif clickedCensor(x, y) then
+            self.click:play()
             self.buttonStates['censor'].state = 1
         end
     end
@@ -125,15 +136,19 @@ end
 function Game:handleMouse(x, y, button)
     if button == 'l' then
         if clickedRadioRight(x, y) then
+            self.click:play()
             self.player.radio:advanceDial()
             self.buttonStates['next'].state = 0
         elseif clickedRadioLeft(x, y) then
+            self.click:play()
             self.player.radio:retreatDial()
             self.buttonStates['prev'].state = 0
         elseif clickedCensor(x, y) then
+            self.click:play()
             self.player:censorStation()
             self.buttonStates['censor'].state = 0
         else
+            self.click:play()
             -- lazy: click only counts if it ends on the button as well
             self.buttonStates['censor'].state = 0
             self.buttonStates['prev'].state = 0
