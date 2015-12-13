@@ -186,6 +186,7 @@ function Radio:censor()
 
     local hasViolation, message = current:hasActiveViolation()
     if hasViolation then
+        playRandomStatic()
         current:censor(govt.source)
         govt:foreground()
         return hasViolation, message
