@@ -48,6 +48,7 @@ end
 function Radio:draw()
     local w, h = love.graphics.getWidth(), love.graphics.getHeight()
     local current = self:currentStation()
+    love.graphics.print("press 'e' to end the game", w / 1.5, h / 2)
     if current.censored then
         love.graphics.print('[CENSORED]', w / 3, h / 2.5)
     else
@@ -119,5 +120,11 @@ function Radio:censor()
         return hasViolation, message
     else
         return false, "no_violation"
+    end
+end
+
+function Radio:conclude()
+    for _, station in ipairs(self.stations) do
+        station:conclude()
     end
 end

@@ -1,39 +1,60 @@
 math.randomseed(os.time())
 math.random()
 
+require 'lib/game'
+require 'lib/tutorial'
+require 'lib/endgame'
 
-require 'lib/player'
+--TODO: nice transitions or something
+local function advanceToGame()
+    state = 'ingame'
+    game:start()
+end
 
+local function advanceToEndgame()
+    state = 'endgame'
+    endgame:start()
+end
+
+local function init()
+    --deliberately globals
+    state = 'tutorial'
+    tutorial = Tutorial:new(advanceToGame)
+    tutorial:start()
+    game = Game:new(advanceToEndgame)
+    endgame = Endgame:new(init)
+end
 
 function love.load()
-    background = love.graphics.newImage("assets/img/mainscreen.png")
-    state = 'ingame'
-    player = Player:new()
+    init()
 end
 
 function love.update(dt)
     if state == 'ingame' then
-        player:update(dt)
+        game:update(dt)
     elseif state == 'tutorial' then
-
+        tutorial:update(dt)
     elseif state == 'endgame' then
-
+        endgame:update(dt)
     end
 end
 
 function love.keypressed(key)
-    if key == 'right' then
-        player.radio:advanceDial()
-    elseif key == 'left' then
-        player.radio:retreatDial()
-    elseif key == 'c' then
-        player:censorStation()
+    if state == "ingame" then
+        game:handleKey(key)
+    elseif state == 'tutorial' then
+        tutorial:handleKey(key)
+    elseif state == 'endgame' then
+        endgame:handleKey(key)
     end
 end
 
 function love.draw()
     if state == 'ingame' then
-        love.graphics.draw(background)
-        player:draw()
+        game:draw()
+    elseif state == "tutorial" then
+        tutorial:draw()
+    elseif state == "endgame" then
+        endgame:draw()
     end
 end

@@ -5,6 +5,9 @@ Player = class('Player')
 
 function Player:initialize()
     self.radio = Radio:new()
+end
+
+function Player:start()
     self.radio:start()
 end
 
@@ -19,7 +22,7 @@ local censorOutcomes = {
 }
 
 function Player:censorStation()
-    --TODO: handle messages and do stuff
+    --TODO: self:notify("blah blah blah")
     local success, message = self.radio:censor()
     print("tried to censor: ", success, message, censorOutcomes[message])
 end
@@ -30,4 +33,13 @@ end
 
 function Player:update(dt)
     self.radio:update(dt)
+end
+
+-- TODO: some way to send messages
+function Player:notify()
+
+end
+
+function Player:conclude()
+    self.radio:conclude()
 end

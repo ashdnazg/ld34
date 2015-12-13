@@ -69,3 +69,7 @@ end
 function Station:uncensor()
     self.source = self.originalSource
 end
+
+function Station:conclude()
+    self.source:stop()
+end
