@@ -13,12 +13,12 @@ function Player:start()
 end
 
 local censorOutcomes = {
-    govt = "this channel is already spreading THE TRUTH!",
-    already_censored = "this channel is already spreading THE TRUTH!",
-    no_violation = "this channel is not currently in violation of any rules",
+    govt = "This channel is already spreading THE TRUTH!",
+    already_censored = "This channel is already spreading THE TRUTH!",
+    no_violation = "This channel is not currently in violation of any rules",
     profession = "FILTHY SEWAGE MONGERS!",
     lies = "Such falsehoods will not be tolerated.",
-    morale = "Undermining the national morale.",
+    morale = "Our spirit is as strong as a paperweight.",
     top_secret = "Aiding and abetting THE ENEMY.",
     frup_grows_greater = "FRUP GROWS EVER GREATER. Not any other way."
 }
@@ -26,12 +26,12 @@ local censorOutcomes = {
 local unrestText = {
     "The public is content. Bob is beloved.",
     "Occasional jokes about Bob in pubs",
-    "PUBLIC LEVEL 3",
-    "PUBLIC LEVEL 4",
-    "PUBLIC LEVEL 5",
-    "PUBLIC LEVEL 6",
-    "PUBLIC LEVEL 7",
-    "PUBLIC LEVEL 8",
+    "A rogue paper published Caricatures of Bob",
+    "Grandmas reminisce about pre-Bob FRUP",
+    "M-Info popularity at a historical low point",
+    "Criminals caught calling for Bob's resignation",
+    "Graffiti on the Palace: \"Bob is a slob!\"",
+    "Daily defecting rate is double the usual",
     "#FRUPlies is trending worldwide on Twitter",
     "Mass demonstrations across the country.",
     "Bob is displeased with you.",
