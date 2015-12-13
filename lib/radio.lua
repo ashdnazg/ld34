@@ -34,7 +34,6 @@ local stations = {
         display = love.graphics.newImage('assets/img/aliens.png'),
         violations = {
             { range = { 90, 95 } , reason = "lies"  },
-            { range = { 180, 500 }, reason = "morale" }
         }
     },
     {
@@ -60,8 +59,11 @@ local stations = {
         filename = 'assets/audio/talk_show.ogg',
         display = love.graphics.newImage('assets/img/talk_show.png'),
         violations = {
-            --TODO: set violations
-            { range = { 1, 60 }, reason = "lies" },
+            { range = { 9, 14 }, reason = "profession" },
+			{ range = { 32, 37 }, reason = "lies" },
+			{ range = { 56, 61 }, reason = "morale" },
+			{ range = { 75, 84 }, reason = "profession" },
+			{ range = { 116, 125 }, reason = "profession" }
         }
     },
     {
@@ -69,8 +71,8 @@ local stations = {
         filename = 'assets/audio/frupnfunk.ogg',
         display = love.graphics.newImage('assets/img/frupnfunk.png'),
         violations = {
-            --TODO: set violations
-            { range = { 1, 60 }, reason = "lies" },
+            { range = { 145, 157 }, reason = "lies" },
+			{ range = { 162, 170 }, reason = "morale" },
         }
     },
     {
@@ -78,8 +80,7 @@ local stations = {
         filename = 'assets/audio/news.ogg',
         display = love.graphics.newImage('assets/img/news.png'),
         violations = {
-            --TODO: set violations
-            { range = { 1, 60 }, reason = "lies" },
+            { range = { 125, 130 }, reason = "lies" },
         }
     },
     {
@@ -87,8 +88,7 @@ local stations = {
         filename = 'assets/audio/weather.ogg',
         display = love.graphics.newImage('assets/img/rain.png'),
         violations = {
-            --TODO: set violations
-            { range = { 1, 60 }, reason = "lies" },
+            { range = { 73, 80 }, reason = "lies" },
         }
     }
 }
