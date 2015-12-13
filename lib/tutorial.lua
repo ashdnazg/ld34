@@ -53,6 +53,11 @@ function Tutorial:handleKey(key)
         self:conclude()
     end
 end
+function Tutorial:mousePressed(x, y, key)
+end
+
+function Tutorial:handleMouse(x, y, key)
+end
 
 -- clean stuff up
 function Tutorial:conclude()

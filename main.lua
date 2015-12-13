@@ -61,6 +61,26 @@ function love.keyreleased(key)
     end
 end
 
+function love.mousepressed(x, y, button)
+    if state == "ingame" then
+        game:mousePressed(x, y, button)
+    elseif state == 'tutorial' then
+        tutorial:mousePressed(x, y, button)
+    elseif state == 'endgame' then
+        endgame:mousePressed(x, y, button)
+    end
+end
+
+function love.mousereleased(x, y, button)
+    if state == "ingame" then
+        game:handleMouse(x, y, button)
+    elseif state == 'tutorial' then
+        tutorial:handleMouse(x, y, button)
+    elseif state == 'endgame' then
+        endgame:handleMouse(x, y, button)
+    end
+end
+
 function love.draw()
     if state == 'ingame' then
         game:draw()

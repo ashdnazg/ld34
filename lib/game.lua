@@ -71,6 +71,77 @@ function Game:handleKey(key)
     end
 end
 
+local function clickedRadioRight(x, y)
+    local leftX = 430
+    local rightX = 490
+    local bottomY = 400
+    local topY = 365
+
+    if (x >= leftX and x <= rightX) and (y <= bottomY and y >= topY) then
+        return true
+    end
+
+    return false
+end
+
+local function clickedRadioLeft(x, y)
+    local leftX = 300
+    local rightX = 360
+    local bottomY = 400
+    local topY = 360
+
+    if (x >= leftX and x <= rightX) and (y <= bottomY and y >= topY) then
+        return true
+    end
+
+    return false
+end
+
+local function dist(x1,y1, x2,y2) return ((x2-x1)^2+(y2-y1)^2)^0.5 end
+
+local function clickedCensor(x, y)
+    local cx, cy = 128, 352
+    local radius = 50
+    local dist = dist(cx, cy, x, y)
+    if dist <= radius then
+        return true
+    end
+
+    return false
+end
+
+function Game:mousePressed(x, y, button)
+    if button == 'l' then
+        if clickedRadioRight(x, y) then
+            self.buttonStates['next'].state = 1
+        elseif clickedRadioLeft(x, y) then
+            self.buttonStates['prev'].state = 1
+        elseif clickedCensor(x, y) then
+            self.buttonStates['censor'].state = 1
+        end
+    end
+end
+
+function Game:handleMouse(x, y, button)
+    if button == 'l' then
+        if clickedRadioRight(x, y) then
+            self.player.radio:advanceDial()
+            self.buttonStates['next'].state = 0
+        elseif clickedRadioLeft(x, y) then
+            self.player.radio:retreatDial()
+            self.buttonStates['prev'].state = 0
+        elseif clickedCensor(x, y) then
+            self.player:censorStation()
+            self.buttonStates['censor'].state = 0
+        else
+            -- lazy: click only counts if it ends on the button as well
+            self.buttonStates['censor'].state = 0
+            self.buttonStates['prev'].state = 0
+            self.buttonStates['next'].state = 0
+        end
+    end
+end
+
 function Game:conclude(reason)
     print("game is ending!", reason)
     self.player:conclude()

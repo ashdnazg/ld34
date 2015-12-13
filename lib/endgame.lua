@@ -60,3 +60,9 @@ function Endgame:handleKey(key)
         self:advanceGameState()
     end
 end
+
+function Endgame:mousePressed(x, y, key)
+end
+
+function Endgame:handleMouse(x, y, key)
+end
