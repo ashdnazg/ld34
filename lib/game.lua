@@ -72,8 +72,8 @@ function Game:handleKey(key)
 end
 
 -- cascade
-function Game:conclude()
-    print("game is ending!")
+function Game:conclude(reason)
+    print("game is ending!", reason)
     self.player:conclude()
     self.advanceGameState()
 end

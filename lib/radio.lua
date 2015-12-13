@@ -52,7 +52,6 @@ function Radio:initialize()
         local station = Station:new(stationDef)
         table.insert(self.stations, station)
     end
-    self.censoredStations = {}
     self.currentStationIndex = 1
 end
 

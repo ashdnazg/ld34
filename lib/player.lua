@@ -5,6 +5,7 @@ Player = class('Player')
 
 function Player:initialize()
     self.radio = Radio:new()
+    self.unrest = 1
 end
 
 function Player:start()
@@ -22,13 +23,42 @@ local censorOutcomes = {
     frup_grows_greater = "FRUP GROWS EVER GREATER. Not any other way."
 }
 
+local unrestText = {
+    "The public is content. Bob is beloved.",
+    "Occasional jokes about Bob in pubs",
+    "PUBLIC LEVEL 3",
+    "PUBLIC LEVEL 4",
+    "PUBLIC LEVEL 5",
+    "PUBLIC LEVEL 6",
+    "PUBLIC LEVEL 7",
+    "PUBLIC LEVEL 8",
+    "#FRUPlies is trending worldwide on Twitter",
+    "Mass demonstrations across the country.",
+    "Bob is displeased with you.",
+    "Game over"
+}
+
 function Player:censorStation()
     --TODO: self:notify("blah blah blah")
     local success, message = self.radio:censor()
-    print("tried to censor: ", success, message, censorOutcomes[message])
+    if success then
+
+    else
+        -- TODO: per-channel censorship failure messages? like, how dare you
+        -- censor a beloved children's radio host
+        self.unrest = self.unrest + 1
+        if self.unrest == #unrestText then
+            game:conclude("failure")
+        end
+    end
+
+    print("tried  to censor: ", success, message, censorOutcomes[message])
 end
 
+-- all player monitors: successful/failed censors
 function Player:draw()
+    local w, h = love.graphics.getWidth(), love.graphics.getHeight()
+    love.graphics.print(unrestText[self.unrest], w / 4.5, h / 1.5)
     self.radio:draw()
 end
 
