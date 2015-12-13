@@ -8,11 +8,13 @@ require 'lib/endgame'
 --TODO: nice transitions or something
 local function advanceToGame()
     state = 'ingame'
+    love.graphics.setColor(255, 255, 255, 255)
     game:start()
 end
 
-local function advanceToEndgame()
+local function advanceToEndgame(endType)
     state = 'endgame'
+    love.graphics.setColor(255, 255, 255, 255)
     endgame:start()
 end
 

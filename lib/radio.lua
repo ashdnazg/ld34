@@ -140,7 +140,11 @@ function Radio:censor()
 end
 
 function Radio:conclude()
+    local current = self:currentStation()
     for _, station in ipairs(self.stations) do
-        station:conclude()
+        -- the current station gets a fade-out from the endgame object
+        if station ~= current then
+            station:conclude()
+        end
     end
 end
