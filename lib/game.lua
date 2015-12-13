@@ -52,7 +52,7 @@ function Game:keyPress(key)
     elseif key == 'left' then
         self.click:play()
         self.buttonStates['prev'].state = 1
-    elseif key == 'c' then
+    elseif key == ' ' then
         self.click:play()
         self.buttonStates['censor'].state = 1
     elseif key == 'e' then
@@ -70,7 +70,7 @@ function Game:handleKey(key)
         self.click:play()
         self.player.radio:retreatDial()
         self.buttonStates['prev'].state = 0
-    elseif key == 'c' then
+    elseif key == ' ' then
         self.click:play()
         self.player:censorStation()
         self.buttonStates['censor'].state = 0
