@@ -17,11 +17,13 @@ local stations = {
     {
         name = 'FRUP FM',
         filename = 'assets/audio/govt.ogg',
+        display = love.graphics.newImage('assets/img/govt.png'),
         violations = {}
     },
     {
         name = "FRUP4KIDS FM",
         filename = 'assets/audio/children.ogg',
+        display = love.graphics.newImage('assets/img/children.png'),
         violations = {
             { range =  { 142, 500 }, reason = "lies" }
         },
@@ -29,6 +31,7 @@ local stations = {
     {
         name = "E.T. FM",
         filename = 'assets/audio/aliens.ogg',
+        display = love.graphics.newImage('assets/img/aliens.png'),
         violations = {
             { range = { 90, 95 } , reason = "lies"  },
             { range = { 180, 500 }, reason = "morale" }
@@ -37,6 +40,7 @@ local stations = {
     {
         name = 'Voice of Liberty FM',
         filename = 'assets/audio/opposition.ogg',
+        display = love.graphics.newImage('assets/img/opposition.png'),
         violations = {
             { range = { 1, 60 }, reason = "lies" },
             -- TODO: classify more
@@ -46,6 +50,7 @@ local stations = {
     {
         name = 'CAT RADIO',
         filename = 'assets/audio/cats.ogg',
+        display = love.graphics.newImage('assets/img/cats.png'),
         violations = {
             { range = { 115, 119 }, reason = "frup_grows_greater" }
         }
@@ -53,6 +58,7 @@ local stations = {
     {
         name = 'Flip FM',
         filename = 'assets/audio/talk_show.ogg',
+        display = love.graphics.newImage('assets/img/talk_show.png'),
         violations = {
             --TODO: set violations
             { range = { 1, 60 }, reason = "lies" },
@@ -61,6 +67,7 @@ local stations = {
     {
         name = "FRUP n' Funk",
         filename = 'assets/audio/frupnfunk.ogg',
+        display = love.graphics.newImage('assets/img/frupnfunk.png'),
         violations = {
             --TODO: set violations
             { range = { 1, 60 }, reason = "lies" },
@@ -69,6 +76,7 @@ local stations = {
     {
         name = "Daily FRUP",
         filename = 'assets/audio/news.ogg',
+        display = love.graphics.newImage('assets/img/news.png'),
         violations = {
             --TODO: set violations
             { range = { 1, 60 }, reason = "lies" },
@@ -77,6 +85,7 @@ local stations = {
     {
         name = "Rain Radio",
         filename = 'assets/audio/weather.ogg',
+        display = love.graphics.newImage('assets/img/rain.png'),
         violations = {
             --TODO: set violations
             { range = { 1, 60 }, reason = "lies" },
@@ -103,13 +112,14 @@ end
 function Radio:draw()
     local w, h = love.graphics.getWidth(), love.graphics.getHeight()
     local current = self:currentStation()
-    love.graphics.print("press 'e' to end the game", w / 1.5, h / 2)
     if current.censored then
-        love.graphics.print('[CENSORED]', w / 3, h / 2.5)
+        local govt = self:govtStation()
+        love.graphics.draw(govt.display)
     else
-        love.graphics.print(current.name, w / 3, h / 2.5)
-        love.graphics.print(current.loops, w / 5, h / 2.5)
-        love.graphics.print(current.position, w / 1.5, h / 2.5)
+        love.graphics.draw(current.display)
+        --love.graphics.print(current.name, w / 3, h / 2.5)
+        --love.graphics.print(current.loops, w / 5, h / 2.5)
+        --love.graphics.print(current.position, w / 1.5, h / 2.5)
     end
 end
 

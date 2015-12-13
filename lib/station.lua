@@ -8,6 +8,7 @@ function Station:initialize(def)
     self.violations = def.violations
 
     self.loops = 0
+    self.display = def.display
     self.source = love.audio.newSource(def.filename)
 	self.source:setVolume(0)
     self.source:setLooping(true)
