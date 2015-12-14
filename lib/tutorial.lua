@@ -101,19 +101,16 @@ function Tutorial:update(dt)
     local phase = self.phases[self.phase]
     local phaseDone = phase.autoadvance
     if phase.colorTween then
-        --print("phase ", self.phase, "and colorTween", phase.color.alpha)
         local tweenDone = phase.colorTween:update(dt)
         phaseDone = phaseDone and phase.colorTween:update(dt)
     end
 
     if phase.soundTween then
-        print("phase ", self.phase, "and colorTween", phase.sound.vol)
         self.source:setVolume(phase.sound.vol)
         phaseDone = phaseDone and phase.soundTween:update(dt)
     end
 
     if self.phase == 5 then
-        print("advancing game state to game!!")
         self.source:stop()
         self.advanceGameState()
     end
@@ -138,12 +135,10 @@ function Tutorial:mousePressed(x, y, key)
 end
 
 function Tutorial:handleMouse(x, y, key)
-
 end
 
 -- clean stuff up
 function Tutorial:conclude()
     self.concluding = true
-    print("tutorial is ending!")
     self:fadeOut()
 end
