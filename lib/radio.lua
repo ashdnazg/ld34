@@ -73,7 +73,7 @@ local stations = {
         }
     },
     {
-        name = "FRUP n' Funk",
+        name = "FRUP 'n' Funk",
         filename = 'assets/audio/frupnfunk.ogg',
         length = 181.72,
         display = love.graphics.newImage('assets/img/frupnfunk.png'),
