@@ -22,7 +22,7 @@ local censorOutcomes = {
     lies = "Such falsehoods will not be tolerated.",
     morale = "Our spirit is as strong as a paperweight.",
     top_secret = "Aiding and abetting THE ENEMY.",
-    frup_grows_greater = "FRUP GROWS EVER GREATER. Not any other way."
+    frup_grows_greater = "FRUP GROWS EVER GREATER."
 }
 
 local unrestText = {
@@ -45,7 +45,7 @@ function Player:censorStation()
     local success, message = self.radio:censor()
     if success then
         self.censored = self.censored + 1
-        self:notify("Good work. " .. censorOutcomes[message])
+        self:notify(censorOutcomes[message])
         -- GOOD JOB PLAYER. highlight the rule that was violated?
         if self.censored == (#self.radio.stations - 1) then
             game:conclude("success")
@@ -53,9 +53,13 @@ function Player:censorStation()
     else
         -- TISK TISK. BAD PLAYER: play nasty sound, flash a light, whatever.
         -- show the message, bump the unrest meter + associated message
-        self:notify('WRONG')
         self.failedCensorSound:play()
-        self.unrest = self.unrest + 1
+        if message:lower() == "no_violation" then
+            self.unrest = self.unrest + 1
+            self:notify("No violation found!")
+        else
+            self:notify("Don't censor the Ministry!")
+        end
         if self.unrest == #unrestText then
             game:conclude("failure")
         end
@@ -65,11 +69,12 @@ end
 -- all player monitors: successful/failed censors
 function Player:draw()
     local w, h = love.graphics.getWidth(), love.graphics.getHeight()
-    love.graphics.setColor(0, 0, 0, 255)
-    love.graphics.print("public status: " .. unrestText[self.unrest], 50, 70)
-    love.graphics.print("truthified: " .. self.censored .. "/" .. (#self.radio.stations - 1), 50, 100)
+    love.graphics.setColor(200, 0, 0, 255)
+    love.graphics.print("Public sentiment:", 20, 48)
+    love.graphics.print(unrestText[self.unrest], 20, 64)
+    love.graphics.print("Truthified: " .. self.censored .. "/" .. (#self.radio.stations - 1), 20, 96)
     if self.notice then
-        love.graphics.print(self.notice, 50, 150)
+        love.graphics.print(self.notice, 20, 128)
     end
     love.graphics.setColor(255, 255, 255, 255)
     self.radio:draw()
