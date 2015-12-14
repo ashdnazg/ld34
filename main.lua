@@ -62,6 +62,7 @@ function love.keyreleased(key)
 end
 
 function love.mousepressed(x, y, button)
+    print(x, y)
     if state == "ingame" then
         game:mousePressed(x, y, button)
     elseif state == 'tutorial' then
