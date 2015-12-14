@@ -5,6 +5,7 @@ Player = class('Player')
 
 function Player:initialize()
     self.radio = Radio:new()
+    self.censored = 0
     self.unrest = 1
 end
 
@@ -42,7 +43,11 @@ function Player:censorStation()
     --TODO: self:notify("blah blah blah")
     local success, message = self.radio:censor()
     if success then
-
+        self.censored = self.censored + 1
+        -- GOOD JOB PLAYER. highlight the rule that was violated?
+        if self.censored == (#self.radio.stations - 1) then
+            game:conclude("success")
+        end
     else
         -- TODO: per-channel censorship failure messages? like, how dare you
         -- censor a beloved children's radio host

@@ -17,12 +17,14 @@ local stations = {
     {
         name = 'FRUP FM',
         filename = 'assets/audio/govt.ogg',
+        length = 265,
         display = love.graphics.newImage('assets/img/govt.png'),
         violations = {}
     },
     {
         name = "FRUP4KIDS FM",
         filename = 'assets/audio/children.ogg',
+        length = 204,
         display = love.graphics.newImage('assets/img/children.png'),
         violations = {
             { range =  { 142, 500 }, reason = "lies" }
@@ -31,6 +33,7 @@ local stations = {
     {
         name = "E.T. FM",
         filename = 'assets/audio/aliens.ogg',
+        length = 181.38,
         display = love.graphics.newImage('assets/img/aliens.png'),
         violations = {
             { range = { 90, 95 } , reason = "lies"  },
@@ -39,6 +42,7 @@ local stations = {
     {
         name = 'Voice of Liberty FM',
         filename = 'assets/audio/opposition.ogg',
+        length = 168.71,
         display = love.graphics.newImage('assets/img/opposition.png'),
         violations = {
             { range = { 1, 60 }, reason = "lies" },
@@ -49,6 +53,7 @@ local stations = {
     {
         name = 'CAT RADIO',
         filename = 'assets/audio/cats.ogg',
+        length = 161.53,
         display = love.graphics.newImage('assets/img/cats.png'),
         violations = {
             { range = { 115, 119 }, reason = "frup_grows_greater" }
@@ -57,6 +62,7 @@ local stations = {
     {
         name = 'Flip FM',
         filename = 'assets/audio/talk_show.ogg',
+        length = 138.15,
         display = love.graphics.newImage('assets/img/talk_show.png'),
         violations = {
             { range = { 9, 14 }, reason = "profession" },
@@ -69,6 +75,7 @@ local stations = {
     {
         name = "FRUP n' Funk",
         filename = 'assets/audio/frupnfunk.ogg',
+        length = 181.72,
         display = love.graphics.newImage('assets/img/frupnfunk.png'),
         violations = {
             { range = { 145, 157 }, reason = "lies" },
@@ -78,6 +85,7 @@ local stations = {
     {
         name = "Daily FRUP",
         filename = 'assets/audio/news.ogg',
+        length = 133.25,
         display = love.graphics.newImage('assets/img/news.png'),
         violations = {
             { range = { 125, 130 }, reason = "lies" },
@@ -86,6 +94,7 @@ local stations = {
     {
         name = "Rain Radio",
         filename = 'assets/audio/weather.ogg',
+        length = 154.64,
         display = love.graphics.newImage('assets/img/rain.png'),
         violations = {
             { range = { 73, 80 }, reason = "top_secret" },

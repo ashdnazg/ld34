@@ -15,7 +15,7 @@ end
 local function advanceToEndgame(endType)
     state = 'endgame'
     love.graphics.setColor(255, 255, 255, 255)
-    endgame:start()
+    endgame:start(endType)
 end
 
 local function init()

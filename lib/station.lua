@@ -6,6 +6,7 @@ Station = class('Station')
 function Station:initialize(def)
     self.name = def.name
     self.violations = def.violations
+    self.length = def.length
 
     self.loops = 0
     self.display = def.display
@@ -16,6 +17,8 @@ function Station:initialize(def)
     -- so that checks are staggered through the second
     self.tellCheck = math.random()
 
+    self.isForeground = false
+    self.foregroundTime = 0
     self.censored = false
 end
 
@@ -27,6 +30,18 @@ function Station:update(dt)
     self.tellCheck = self.tellCheck + dt
     if self.tellCheck >= 1 then
         self.tellCheck = 0
+
+        if self.isForeground and self.foregroundTime <= self.length then
+            if self.censored then
+                local govt = game.player.radio:govtStation()
+                if govt.foregroundTime < govt.length then
+                    govt.foregroundTime = govt.foregroundTime + 1
+                end
+            else
+                self.foregroundTime = self.foregroundTime + 1
+            end
+        end
+
         local position = self.source:tell()
         if position < self.position then
             self.loops = self.loops + 1
@@ -37,11 +52,13 @@ end
 
 --TODO: timer, crossfade, static?
 function Station:foreground()
+    self.isForeground = true
 	self.source:setVolume(1)
 end
 
 --TODO: timer, crossfade?
 function Station:background()
+    self.isForeground = false
 	self.source:setVolume(0)
 end
 
@@ -69,6 +86,14 @@ end
 
 function Station:uncensor()
     self.source = self.originalSource
+end
+
+function Station:completion()
+    local percent = 100 * (self.foregroundTime / self.length)
+    if percent > 100 then
+        percent = 100
+    end
+    return tonumber(string.format("%.2f", percent))
 end
 
 function Station:conclude()

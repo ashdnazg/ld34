@@ -17,8 +17,8 @@ function Tutorial:start()
         }
     }
     local conclude = self.phases[2]
-    conclude.colorTween = tween.new(5, conclude.color, { alpha = 0 }, 'linear')
-    conclude.soundTween = tween.new(5, conclude.sound, { vol = 1 }, 'linear')
+    conclude.colorTween = tween.new(3, conclude.color, { alpha = 0 }, 'linear')
+    conclude.soundTween = tween.new(3, conclude.sound, { vol = 1 }, 'linear')
 end
 
 function Tutorial:draw()

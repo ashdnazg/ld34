@@ -14,12 +14,44 @@ function Endgame:initialize(advanceGameState)
         }
     }
     local first = self.phases[1]
-    first.colorTween = tween.new(5, first.color, { alpha = 255 }, 'linear')
-    first.soundTween = tween.new(5, first.sound, { vol = 0 }, 'linear')
+    first.colorTween = tween.new(3, first.color, { alpha = 255 }, 'linear')
+    first.soundTween = tween.new(3, first.sound, { vol = 0 }, 'linear')
 end
 
-function Endgame:start()
+function Endgame:start(endType)
+    self.endType = endType
+end
 
+local function printStats(endType)
+    local radio = game.player.radio
+    local player = game.player
+    local badCensors = player.unrest - 1 -- index, starts at one
+    local totalChannels = #radio.stations - 1 -- govt doesn't count
+    local censoredChannels = 0
+    local govt = radio:govtStation()
+    local completion = {}
+    for i, station in ipairs(radio.stations) do
+        -- we want to preserve order
+        table.insert(completion, { station.name, station:completion() })
+
+        if station ~= govt then
+            if station.censored then
+                censoredChannels = censoredChannels + 1
+            end
+        end
+    end
+
+    local w, h = love.graphics.getWidth(), love.graphics.getHeight()
+    love.graphics.print(endType .. ": you saved FRUP from " .. censoredChannels .. " of " .. totalChannels .. " subversive radio stations", w / 3, h / 2)
+
+    love.graphics.print("in the process, you incorrectly censored " .. badCensors .. " times", w / 8, h / 5)
+
+
+    for i, completion in ipairs(completion) do
+        love.graphics.print("you heard " .. completion[2] .. "% of " .. completion[1],
+        w / 4.5,
+        h / 2 + (i * 15))
+    end
 end
 
 function Endgame:draw()
@@ -32,6 +64,7 @@ function Endgame:draw()
         love.graphics.rectangle( "fill", 0, 0, w, h )
     else
         love.graphics.setColor(255, 255, 255, 255)
+        printStats(self.endType)
         love.graphics.print("this is the ENDGAME, press 'e' to restart the game", w / 3, h / 2.5)
     end
 end
