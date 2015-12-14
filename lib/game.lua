@@ -55,8 +55,6 @@ function Game:keyPress(key)
     elseif key == ' ' then
         self.click:play()
         self.buttonStates['censor'].state = 1
-    elseif key == 'e' then
-        self:conclude()
     end
 
 end
@@ -74,8 +72,6 @@ function Game:handleKey(key)
         self.click:play()
         self.player:censorStation()
         self.buttonStates['censor'].state = 0
-    elseif key == 'e' then
-        self:conclude()
     end
 end
 
