@@ -80,7 +80,7 @@ function Tutorial:draw()
     love.graphics.print("1) Important: Make sure your audio is on.", 20, 48)
     love.graphics.print("2) Imperialist lies? Hit the button!", 20, 64)
     love.graphics.print("3) Truth? Don't Hit the button!", 20, 80)
-    love.graphics.print("Press space to skip tutorial", 20, 112)
+    love.graphics.print("Press <space> to skip tutorial", 20, 112)
     love.graphics.setColor(255, 255, 255, 255)
 
     if phase.color then
