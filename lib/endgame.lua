@@ -14,8 +14,8 @@ function Endgame:initialize(advanceGameState)
         }
     }
     local first = self.phases[1]
-    first.colorTween = tween.new(3, first.color, { alpha = 255 }, 'linear')
-    first.soundTween = tween.new(3, first.sound, { vol = 0 }, 'linear')
+    first.colorTween = tween.new(1, first.color, { alpha = 255 }, 'linear')
+    first.soundTween = tween.new(1, first.sound, { vol = 0 }, 'linear')
 end
 
 function Endgame:start(endType)
@@ -50,6 +50,7 @@ local function printStats(endType)
     local font = love.graphics.newFont(fontSize)
     local header = love.graphics.newFont(headerSize)
     love.graphics.setFont(header)
+    love.graphics.print("<enter> to play again!", w / 5, h - (lineSize * 4))
 
     if censoredChannels == totalChannels then
         love.graphics.setColor(0, 200, 0, 255)
@@ -78,6 +79,7 @@ local function printStats(endType)
         r = r + lineSize
     end
 
+
     love.graphics.setColor(255, 255, 255, 255)
     love.graphics.setFont(love.graphics.newFont(12))
 end
@@ -93,7 +95,6 @@ function Endgame:draw()
     else
         love.graphics.setColor(255, 255, 255, 255)
         printStats(self.endType)
-        love.graphics.print("this is the ENDGAME, press 'e' to restart the game", w / 3, h / 2.5)
     end
 end
 
@@ -117,7 +118,7 @@ function Endgame:update(dt)
 end
 
 function Endgame:handleKey(key)
-    if key == 'e' then
+    if key == 'return' then
         self:advanceGameState()
     end
 end
