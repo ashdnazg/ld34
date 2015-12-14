@@ -7,6 +7,7 @@ function Player:initialize()
     self.radio = Radio:new()
     self.censored = 0
     self.unrest = 1
+    self.failedCensorSound = love.audio.newSource("assets/audio/nope.ogg")
 end
 
 function Player:start()
@@ -53,6 +54,7 @@ function Player:censorStation()
         -- TISK TISK. BAD PLAYER: play nasty sound, flash a light, whatever.
         -- show the message, bump the unrest meter + associated message
         self:notify('WRONG')
+        self.failedCensorSound:play()
         self.unrest = self.unrest + 1
         if self.unrest == #unrestText then
             game:conclude("failure")
