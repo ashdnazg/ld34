@@ -30,6 +30,7 @@ local function printStats(endType)
     local censoredChannels = 0
     local govt = radio:govtStation()
     local completion = {}
+    local totalStations = 0
     for i, station in ipairs(radio.stations) do
         -- we want to preserve order
         table.insert(completion, { station.name, station:completion() })
@@ -42,16 +43,43 @@ local function printStats(endType)
     end
 
     local w, h = love.graphics.getWidth(), love.graphics.getHeight()
-    love.graphics.print(endType .. ": you saved FRUP from " .. censoredChannels .. " of " .. totalChannels .. " subversive radio stations", w / 3, h / 2)
+    local r = h / 5
+    local fontSize = 16
+    local headerSize = 2 * fontSize
+    local lineSize = fontSize + 2
+    local font = love.graphics.newFont(fontSize)
+    local header = love.graphics.newFont(headerSize)
+    love.graphics.setFont(header)
 
-    love.graphics.print("in the process, you incorrectly censored " .. badCensors .. " times", w / 8, h / 5)
-
-
-    for i, completion in ipairs(completion) do
-        love.graphics.print("you heard " .. completion[2] .. "% of " .. completion[1],
-        w / 4.5,
-        h / 2 + (i * 15))
+    if censoredChannels == totalChannels then
+        love.graphics.setColor(0, 200, 0, 255)
+        love.graphics.print("Well Done!", w / 3, lineSize)
+        love.graphics.setFont(font)
+        love.graphics.print("The Ministry's station has grown to broadcast over the entire spectrum!", lineSize, r)
+        r = r + lineSize * 2
+    else
+        love.graphics.setColor(200, 0, 0, 255)
+        love.graphics.print("Game Over", w / 3, lineSize)
+        love.graphics.setFont(font)
+        love.graphics.print("An angry mob stormed the Ministry and broke your bones and the machine.", lineSize, r)
+        r = r + lineSize * 2
     end
+    love.graphics.print("You saved FRUP from " .. censoredChannels .. " out of " .. totalChannels .. " subversive radio stations", lineSize, r)
+    r = r + lineSize
+    love.graphics.print("In the process, you incorrectly censored " .. badCensors .. " times", lineSize, r)
+    r = r + lineSize * 2
+    love.graphics.print("You listened to: ", lineSize, r)
+    r = r + lineSize
+
+    for _, completion in pairs(completion) do
+        love.graphics.print(completion[2] .. "% of " .. completion[1],
+        w / 4,
+        r)
+        r = r + lineSize
+    end
+
+    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setFont(love.graphics.newFont(12))
 end
 
 function Endgame:draw()
