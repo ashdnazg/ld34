@@ -11,9 +11,9 @@ function Station:initialize(def)
     self.loops = 0
     self.display = def.display
     self.source = love.audio.newSource(def.filename)
-	self.source:setVolume(0)
-    self.source:setLooping(true)
-    self.position = self.source:tell()
+    self.source:setVolume(0)
+    --self.source:setLooping(true)
+    self.position = 0
     -- so that checks are staggered through the second
     self.tellCheck = math.random()
 
@@ -23,11 +23,19 @@ function Station:initialize(def)
 end
 
 function Station:start()
-	self.source:play()
+    self.source:play()
 end
 
 function Station:update(dt)
     self.tellCheck = self.tellCheck + dt
+    self.position = self.position + dt
+    if self.position > self.length then
+        self.source:rewind()
+        self.source:play()
+        self.position = 0
+        self.loops = self.loops + 1
+    end
+
     if self.tellCheck >= 1 then
         self.tellCheck = 0
 
@@ -41,25 +49,19 @@ function Station:update(dt)
                 self.foregroundTime = self.foregroundTime + 1
             end
         end
-
-        local position = self.source:tell()
-        if position < self.position then
-            self.loops = self.loops + 1
-        end
-        self.position = position
     end
 end
 
 --TODO: timer, crossfade, static?
 function Station:foreground()
     self.isForeground = true
-	self.source:setVolume(1)
+    self.source:setVolume(1)
 end
 
 --TODO: timer, crossfade?
 function Station:background()
     self.isForeground = false
-	self.source:setVolume(0)
+    self.source:setVolume(0)
 end
 
 function Station:hasActiveViolation()

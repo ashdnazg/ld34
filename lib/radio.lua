@@ -24,7 +24,7 @@ local stations = {
     {
         name = "FRUP4KIDS FM",
         filename = 'assets/audio/children.ogg',
-        length = 204,
+        length = 210,
         display = love.graphics.newImage('assets/img/children.png'),
         violations = {
             { range =  { 142, 500 }, reason = "lies" }
@@ -66,10 +66,10 @@ local stations = {
         display = love.graphics.newImage('assets/img/talk_show.png'),
         violations = {
             { range = { 9, 14 }, reason = "profession" },
-			{ range = { 32, 37 }, reason = "lies" },
-			{ range = { 56, 61 }, reason = "morale" },
-			{ range = { 75, 84 }, reason = "profession" },
-			{ range = { 116, 125 }, reason = "profession" }
+            { range = { 32, 37 }, reason = "lies" },
+            { range = { 56, 61 }, reason = "morale" },
+            { range = { 75, 84 }, reason = "profession" },
+            { range = { 116, 125 }, reason = "profession" }
         }
     },
     {
@@ -79,16 +79,16 @@ local stations = {
         display = love.graphics.newImage('assets/img/frupnfunk.png'),
         violations = {
             { range = { 145, 157 }, reason = "lies" },
-			{ range = { 162, 170 }, reason = "morale" },
+            { range = { 162, 170 }, reason = "morale" },
         }
     },
     {
         name = "Daily FRUP",
         filename = 'assets/audio/news.ogg',
-        length = 133.25,
+        length = 130.25,
         display = love.graphics.newImage('assets/img/news.png'),
         violations = {
-            { range = { 125, 130 }, reason = "lies" },
+            { range = { 118, 125 }, reason = "lies" },
         }
     },
     {
@@ -154,17 +154,17 @@ local function playRandomStatic()
 end
 
 function Radio:_setActiveStation(newStationIndex)
-	if (newStationIndex > #self.stations) then
-		newStationIndex = 1
-	end
+    if (newStationIndex > #self.stations) then
+        newStationIndex = 1
+    end
 
-	if (newStationIndex <= 0) then
-		newStationIndex = #self.stations
-	end
+    if (newStationIndex <= 0) then
+        newStationIndex = #self.stations
+    end
 
-	local curr = self.stations[self.currentStationIndex]
-	local new = self.stations[newStationIndex]
-	self.currentStationIndex = newStationIndex
+    local curr = self.stations[self.currentStationIndex]
+    local new = self.stations[newStationIndex]
+    self.currentStationIndex = newStationIndex
 
     playRandomStatic()
     curr:background()
@@ -173,14 +173,14 @@ end
 
 function Radio:advanceDial()
     print('advancing dial')
-	local nextIndex = self.currentStationIndex + 1
-	self:_setActiveStation(self.currentStationIndex + 1)
+    local nextIndex = self.currentStationIndex + 1
+    self:_setActiveStation(self.currentStationIndex + 1)
 end
 
 function Radio:retreatDial()
     print('retreating dial')
-	local prevIndex = self.currentStationIndex - 1
-	self:_setActiveStation(self.currentStationIndex - 1)
+    local prevIndex = self.currentStationIndex - 1
+    self:_setActiveStation(self.currentStationIndex - 1)
 end
 
 function Radio:censor()
